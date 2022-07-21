@@ -1,16 +1,12 @@
-import os
 from bs4 import BeautifulSoup
 import requests
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
-people = os.environ["CLIENT_ID"]
-keys = os.environ["CLIENT_SECRET"]
+SPOTIPY_CLIENT_ID = 'YOUR SPOTIFY CLIENT ID'
+SPOTIPY_CLIENT_SECRET = 'YOUR SPOTIFY CLIENT SECRET KEY'
 
-SPOTIPY_CLIENT_ID = 'e24202f677d245798b3264c075b7a8ad'
-SPOTIPY_CLIENT_SECRET = '3f34970f3e8b4d1ab9082d9ed4602044'
-
-sp = spotipy.Spotify(  # documentation explain everything need to the "parameters"
+sp = spotipy.Spotify(  # documentation explain everything needed to the "parameters" but using alot of spotify own documentation helps
     auth_manager=SpotifyOAuth(
         scope="playlist-modify-private",
         redirect_uri="http://example.com",
@@ -22,7 +18,7 @@ sp = spotipy.Spotify(  # documentation explain everything need to the "parameter
 
 user_id = sp.current_user()["id"]
 
-date = input("Para que ano você quer viajar ? Digite a data no formato YYYY-MM-DD: ")
+date = input("Choose a date to make a top 100 songs playlist, in this format please YYYY-MM-DD: ")
 year = date.split("-")[0]  # getting the first parte of the list because of the split 0 is the year
 URL = f"https://www.billboard.com/charts/hot-100/{date}"  # URL of the top 100 musics on the date of the input
 song_uris = []  # lista of object with all the music will be here, using the documentation on songs URIs
